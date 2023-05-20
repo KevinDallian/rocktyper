@@ -14,11 +14,11 @@
 		D812538E2A18C74200F0665C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812538D2A18C74200F0665C /* ViewController.swift */; };
 		D81253902A18C74200F0665C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D812538F2A18C74200F0665C /* Assets.xcassets */; };
 		D81253932A18C74200F0665C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81253912A18C74200F0665C /* Main.storyboard */; };
-		D812539D2A18E80800F0665C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D812539C2A18E80800F0665C /* GameScene.sks */; };
 		D812539F2A18E8AB00F0665C /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812539E2A18E8AB00F0665C /* ButtonNode.swift */; };
 		D81253A22A18F8F800F0665C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81253A12A18F8F800F0665C /* GameScene.swift */; };
 		D81253A42A18F9D100F0665C /* StatScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D81253A32A18F9D100F0665C /* StatScene.sks */; };
 		D81253A62A18F9FE00F0665C /* HowToPlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D81253A52A18F9FE00F0665C /* HowToPlayScene.sks */; };
+		D81253A82A1900CE00F0665C /* RockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81253A72A1900CE00F0665C /* RockNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +31,11 @@
 		D812538F2A18C74200F0665C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D81253922A18C74200F0665C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D81253942A18C74200F0665C /* TyperGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TyperGame.entitlements; sourceTree = "<group>"; };
-		D812539C2A18E80800F0665C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		D812539E2A18E8AB00F0665C /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		D81253A12A18F8F800F0665C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		D81253A32A18F9D100F0665C /* StatScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StatScene.sks; sourceTree = "<group>"; };
 		D81253A52A18F9FE00F0665C /* HowToPlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HowToPlayScene.sks; sourceTree = "<group>"; };
+		D81253A72A1900CE00F0665C /* RockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,6 @@
 			children = (
 				D81253872A18C74200F0665C /* HomeScene.sks */,
 				D81253892A18C74200F0665C /* Actions.sks */,
-				D812539C2A18E80800F0665C /* GameScene.sks */,
 				D81253A32A18F9D100F0665C /* StatScene.sks */,
 				D81253A52A18F9FE00F0665C /* HowToPlayScene.sks */,
 			);
@@ -105,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				D812539E2A18E8AB00F0665C /* ButtonNode.swift */,
+				D81253A72A1900CE00F0665C /* RockNode.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -169,7 +169,6 @@
 			files = (
 				D81253A62A18F9FE00F0665C /* HowToPlayScene.sks in Resources */,
 				D81253882A18C74200F0665C /* HomeScene.sks in Resources */,
-				D812539D2A18E80800F0665C /* GameScene.sks in Resources */,
 				D81253902A18C74200F0665C /* Assets.xcassets in Resources */,
 				D812538A2A18C74200F0665C /* Actions.sks in Resources */,
 				D81253A42A18F9D100F0665C /* StatScene.sks in Resources */,
@@ -184,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81253A82A1900CE00F0665C /* RockNode.swift in Sources */,
 				D81253A22A18F8F800F0665C /* GameScene.swift in Sources */,
 				D812538E2A18C74200F0665C /* ViewController.swift in Sources */,
 				D812538C2A18C74200F0665C /* HomeScene.swift in Sources */,

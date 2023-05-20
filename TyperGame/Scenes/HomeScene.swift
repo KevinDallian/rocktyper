@@ -25,7 +25,7 @@ class HomeScene: SKScene {
         let location = event.location(in: self)
         
         if atPoint(location) == playBtn {
-            goToScene(scene: SKScene(fileNamed: "GameScene")!)
+            goToScene(scene: GameScene())
         }
         else if atPoint(location) == statBtn {
             goToScene(scene: SKScene(fileNamed: "StatScene")!)
