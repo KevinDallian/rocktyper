@@ -13,7 +13,7 @@ class HomeScene: SKScene {
     private var howBtn : SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        self.playBtn = childNode(withName: "//playBtn") as? SKSpriteNode
+        self.playBtn = self.childNode(withName: "//playBtn") as? SKSpriteNode
         self.statBtn = self.childNode(withName: "//statBtn") as? SKSpriteNode
         self.howBtn = self.childNode(withName: "//howBtn") as? SKSpriteNode
     }
