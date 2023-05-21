@@ -8,15 +8,12 @@ import SpriteKit
 import GameplayKit
 
 class HomeScene: SKScene {
-    private var playBtn : ButtonNode!
+    private var playBtn : SKSpriteNode!
     private var statBtn : SKSpriteNode!
     private var howBtn : SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        self.playBtn = childNode(withName: "//playBtn") as? ButtonNode
-        self.playBtn.action = {
-            print("hello world")
-        }
+        self.playBtn = childNode(withName: "//playBtn") as? SKSpriteNode
         self.statBtn = self.childNode(withName: "//statBtn") as? SKSpriteNode
         self.howBtn = self.childNode(withName: "//howBtn") as? SKSpriteNode
     }
@@ -42,7 +39,7 @@ class HomeScene: SKScene {
     
     func goToScene(scene: SKScene){
         let sceneTransition = SKTransition.fade(with: SKColor.darkGray, duration: 1)
-            scene.scaleMode = .aspectFill
+        scene.scaleMode = .resizeFill
         self.view?.presentScene(scene, transition: sceneTransition)
     }
 }

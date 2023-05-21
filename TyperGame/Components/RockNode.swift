@@ -17,13 +17,13 @@ class RockNode : SKSpriteNode{
         let rockSize = rockTexture.size()
         let rockNode = SKSpriteNode(texture: rockTexture, color : .clear, size: rockSize)
         
-        rockNode.size = CGSize(width: 0.15, height: 0.15)
+        rockNode.size = CGSize(width: 120, height: 100)
         
-        textNode = SKLabelNode(text: text)
+        textNode = SKLabelNode(fontNamed: "Arial")
+        textNode.text = text
         textNode.fontSize = 24
-        textNode.fontColor = .white
-        textNode.position = CGPoint(x: 0, y: rockNode.size.height/2 + textNode.fontSize)
-        textNode.zPosition = 100
+        textNode.fontColor = .black
+        textNode.zPosition = 1
         
         super.init(texture: nil, color: .clear, size: rockNode.size)
         addChild(rockNode)
