@@ -15,10 +15,8 @@ class GameScene : SKScene{
     
     override func didMove(to view: SKView){
         loadWords()
-        DispatchQueue.main.async{
             super.didMove(to: view)
             self.initializeBackground()
-        }
         print(words)
     }
     
@@ -54,8 +52,7 @@ class GameScene : SKScene{
             print(characterString)
             if characterString == " " {
                 if checkWordIsTrue(word: textField!.text!){
-                    rocks[0].removeFromParent()
-                    rocks.removeFirst()
+                    removeRock()
                 }
                 textField!.text! = ""
             }
@@ -68,6 +65,16 @@ class GameScene : SKScene{
         }
     }
     
+    func removeRock() {
+        let dissappear = SKAction.scale(to: 0, duration: 0.5)
+        let removeFromParent = SKAction.removeFromParent()
+        let rotation = SKAction.rotate(byAngle: -2*Double.pi, duration: 0.5)
+        let dissapearAndRotate = SKAction.group([dissappear, rotation])
+        let actions = [dissapearAndRotate, removeFromParent]
+        rocks[0].run(SKAction.sequence(actions))
+        rocks.removeFirst()
+    }
+    
     func checkWordIsTrue(word: String) -> Bool{
         word == rocks.first?.textNode.text
     }
@@ -77,7 +84,7 @@ class GameScene : SKScene{
             return
         }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            DispatchQueue.main.async{
+            DispatchQueue.main.sync{
                 if let data = data {
                     do {
                         let decoder = JSONDecoder()
@@ -87,7 +94,6 @@ class GameScene : SKScene{
                             self.words.append(decodedWord)
                         }
                         print(decodedWords)
-                        
                     } catch {
                         print("Error decoding JSON: \(error)")
                     }
