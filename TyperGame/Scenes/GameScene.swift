@@ -11,13 +11,13 @@ import SpriteKit
 class GameScene : SKScene{
     var rocks : [RockNode] = []
     var textField : SKLabelNode?
-    var words : [String] = ["hello", "world", "this", "is", "fine", "mamam"]
+    var wordManager = WordManager.shared
+    var totalRocks = 0
+    var currentRockIndex = 0
     
     override func didMove(to view: SKView){
-        loadWords()
-            super.didMove(to: view)
-            self.initializeBackground()
-        print(words)
+        super.didMove(to: view)
+        self.initializeBackground()
     }
     
     func initializeBackground(){
@@ -25,15 +25,18 @@ class GameScene : SKScene{
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.zPosition = -1
         addChild(background)
-        var index = 0
-        for word in words {
-            let rock = RockNode(text: word)
-            rock.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-            rock.position = CGPoint(x: rock.size.height + rock.size.width * CGFloat(index), y: frame.midY)
-            rocks.append(rock)
-            addChild(rock)
-            index += 1
+        
+        for row in 0..<3 {
+            for column in 0..<7 {
+                let rock = RockNode(text: wordManager.words[totalRocks])
+                rock.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                rock.position = CGPoint(x: rock.size.height + rock.size.width * CGFloat(column), y: frame.maxY - 20 - CGFloat(row) * rock.size.height - rock.size.height)
+                rocks.append(rock)
+                addChild(rock)
+                totalRocks += 1
+            }
         }
+        
         textField = SKLabelNode(text: "")
         textField?.position = CGPoint(x: frame.midX, y: frame.midY - 200)
         addChild(textField!)
@@ -45,16 +48,18 @@ class GameScene : SKScene{
     }
     
     override func keyDown(with event: NSEvent) {
-        guard let characters = event.charactersIgnoringModifiers else { return }
+        guard let characters = event.characters else { return }
+        let keyCode = event.keyCode
 
         for character in characters {
             let characterString = String(character)
-            print(characterString)
             if characterString == " " {
-                if checkWordIsTrue(word: textField!.text!){
-                    removeRock()
+                if checkWordIsTrue(word: textField!.text!, index: currentRockIndex){
+                    nextRock()
                 }
                 textField!.text! = ""
+            } else if keyCode == 51 {
+                textField!.text! = String(textField!.text!.dropLast())
             }
             else{
                 textField!.text! += characterString
@@ -65,40 +70,25 @@ class GameScene : SKScene{
         }
     }
     
-    func removeRock() {
-        let dissappear = SKAction.scale(to: 0, duration: 0.5)
-        let removeFromParent = SKAction.removeFromParent()
-        let rotation = SKAction.rotate(byAngle: -2*Double.pi, duration: 0.5)
-        let dissapearAndRotate = SKAction.group([dissappear, rotation])
-        let actions = [dissapearAndRotate, removeFromParent]
-        rocks[0].run(SKAction.sequence(actions))
-        rocks.removeFirst()
+    func nextRock() {
+        rocks[currentRockIndex].textNode.fontColor = .green
+        currentRockIndex += 1
     }
     
-    func checkWordIsTrue(word: String) -> Bool{
-        word == rocks.first?.textNode.text
+//    func moveRocksToLeft() {
+//        let initialXPosition: CGFloat = 100
+//        let rockSpacing: CGFloat = 10
+//        var index = 0
+//        for rock in rocks {
+//            let newXPosition = initialXPosition + CGFloat(index) * (rock.size.width + rockSpacing)
+//            let moveAction = SKAction.moveTo(x: newXPosition, duration: 0.2)
+//            rock.run(moveAction)
+//            index += 1
+//        }
+//    }
+    
+    func checkWordIsTrue(word: String, index : Int) -> Bool{
+        word == wordManager.words[index]
     }
     
-    func loadWords() {
-        guard let url = URL(string: "https://random-word-api.herokuapp.com/word?number=50&length=5") else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            DispatchQueue.main.sync{
-                if let data = data {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decodedWords = try decoder.decode([String].self, from: data)
-                        
-                        for decodedWord in decodedWords{
-                            self.words.append(decodedWord)
-                        }
-                        print(decodedWords)
-                    } catch {
-                        print("Error decoding JSON: \(error)")
-                    }
-                }
-            }
-        }.resume()
-    }
 }

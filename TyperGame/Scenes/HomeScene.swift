@@ -11,6 +11,7 @@ class HomeScene: SKScene {
     private var playBtn : SKSpriteNode!
     private var statBtn : SKSpriteNode!
     private var howBtn : SKSpriteNode!
+    var wordManager = WordManager.shared
     
     override func didMove(to view: SKView) {
         self.playBtn = self.childNode(withName: "//playBtn") as? SKSpriteNode
