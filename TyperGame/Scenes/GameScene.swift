@@ -18,7 +18,6 @@ class GameScene : SKScene{
     var timerIsOn = false
     let timerNode = TimerNode()
     var rockCounterLabel = SKLabelNode()
-    var rockCounter = 0
     
     override func didMove(to view: SKView){
         super.didMove(to: view)
@@ -35,18 +34,20 @@ class GameScene : SKScene{
         if !timerIsOn {
             timerNode.startTimer()
             timerIsOn = true
+            let startLabel = self.childNode(withName: "startLabel")
+            startLabel?.removeFromParent()
         }
         guard let characters = event.characters else { return }
         let keyCode = event.keyCode
 
         for character in characters {
             let characterString = String(character)
+            
             if characterString == " " {
-                if checkWordIsTrue(word: textField!.text!, index: currentRockIndex){
-                    nextRock()
-                    if currentRockIndex != 7 && currentRockIndex % 7 == 0 {
-                        generateRocks(row: 4)
-                    }
+                let wordIsTrue = checkWordIsTrue(word: textField!.text!, index: currentRockIndex)
+                nextRock(wordIsTrue: wordIsTrue)
+                if currentRockIndex != 7 && currentRockIndex % 7 == 0 {
+                    generateRocks(row: 4)
                 }
                 textField!.text! = ""
             } else if keyCode == 51 {
@@ -63,6 +64,9 @@ class GameScene : SKScene{
     
     override func update(_ currentTime : TimeInterval){
         timerNode.updateTimer()
+        if timerNode.timeIsUp {
+            goToScene(scene: SKScene(fileNamed: "TimesUpScene")!)
+        }
     }
     
     func initializeBackground(){
@@ -70,6 +74,7 @@ class GameScene : SKScene{
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.zPosition = -1
         addChild(background)
+        wordManager.words.shuffle()
         
         for row in 0..<3 {
             for column in 0..<7 {
@@ -105,28 +110,45 @@ class GameScene : SKScene{
         
         // rock counter
         let counterBackground = SKSpriteNode(imageNamed: "textfieldBackground")
-        counterBackground.position = CGPoint(x: frame.maxX - 150, y: frame.maxY - 50)
-        counterBackground.size = CGSize(width: 200, height: 55)
+        counterBackground.position = CGPoint(x: frame.maxX - 160, y: frame.maxY - 50)
+        counterBackground.size = CGSize(width: 150, height: 55)
         addChild(counterBackground)
         let rockCounterImage = SKSpriteNode(imageNamed: "rock1")
-        rockCounterImage.position = CGPoint(x: frame.maxX - 210, y: frame.maxY - 50)
+        rockCounterImage.position = CGPoint(x: frame.maxX - 200, y: frame.maxY - 50)
         rockCounterImage.size = CGSize(width: 35, height: 35)
         addChild(rockCounterImage)
-        rockCounterLabel.text = ":    \(rockCounter)"
+        rockCounterLabel.text = ":    \(wordManager.rockCrushedCounter)"
         rockCounterLabel.fontName = "Skia"
         rockCounterLabel.fontSize = 32
         rockCounterLabel.fontColor = .black
-        rockCounterLabel.position  = CGPoint(x: frame.maxX - 180, y: frame.maxY - 60)
+        rockCounterLabel.position  = CGPoint(x: frame.maxX - 170, y: frame.maxY - 60)
         rockCounterLabel.horizontalAlignmentMode = .left
         addChild(rockCounterLabel)
         
+        // label for start
+        let startLabel = SKLabelNode(text: "Press any key to start")
+        startLabel.fontName = "Skia"
+        startLabel.fontSize = 32
+        startLabel.fontColor = .black
+        startLabel.position = CGPoint(x: frame.midX, y: frame.maxY - 60)
+        startLabel.name = "startLabel"
+        let bigScale = SKAction.scale(to: 1.02, duration: 0.5)
+        let originalScale = SKAction.scale(to: 1.0, duration: 0.5)
+        startLabel.run(SKAction.repeatForever(SKAction.sequence([bigScale, originalScale])))
+        addChild(startLabel)
     }
     
-    func nextRock() {
-        rocks[currentRockIndex].textNode.fontColor = NSColor(calibratedRed: 63/255, green: 232/255, blue: 20/255, alpha: 1.0)
+    func nextRock(wordIsTrue : Bool) {
+        if wordIsTrue {
+            rocks[currentRockIndex].textNode.fontColor = NSColor(calibratedRed: 63/255, green: 232/255, blue: 20/255, alpha: 1.0)
+            wordManager.rockCrushedCounter += 1
+        }else{
+            rocks[currentRockIndex].textNode.fontColor = .red
+            wordManager.rockSkippedCounter += 1
+        }
+        
         currentRockIndex += 1
-        rockCounter += 1
-        rockCounterLabel.text = ":    \(rockCounter)"
+        rockCounterLabel.text = ":    \(wordManager.rockCrushedCounter)"
     }
     
     func generateRocks(row: Int){
@@ -176,5 +198,11 @@ class GameScene : SKScene{
     
     func checkWordIsTrue(word: String, index : Int) -> Bool{
         word == wordManager.words[index]
+    }
+    
+    func goToScene(scene : SKScene){
+        let sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 1)
+        scene.scaleMode = .resizeFill
+        self.view?.presentScene(scene, transition: sceneTransition)
     }
 }

@@ -20,6 +20,8 @@
 		D81253A82A1900CE00F0665C /* RockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81253A72A1900CE00F0665C /* RockNode.swift */; };
 		D87E5CA72A1B4E7100B7D5D5 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87E5CA62A1B4E7100B7D5D5 /* WordManager.swift */; };
 		D8F858B42A1CA4570061AABD /* TimerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F858B32A1CA4570061AABD /* TimerNode.swift */; };
+		D8F858B62A1CBBF20061AABD /* TimesUpScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D8F858B52A1CBBF20061AABD /* TimesUpScene.sks */; };
+		D8F858BA2A1CBDD40061AABD /* TimesUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F858B92A1CBDD40061AABD /* TimesUpScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		D81253A72A1900CE00F0665C /* RockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockNode.swift; sourceTree = "<group>"; };
 		D87E5CA62A1B4E7100B7D5D5 /* WordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
 		D8F858B32A1CA4570061AABD /* TimerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerNode.swift; sourceTree = "<group>"; };
+		D8F858B52A1CBBF20061AABD /* TimesUpScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TimesUpScene.sks; sourceTree = "<group>"; };
+		D8F858B92A1CBDD40061AABD /* TimesUpScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesUpScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 				D81253892A18C74200F0665C /* Actions.sks */,
 				D81253A32A18F9D100F0665C /* StatScene.sks */,
 				D81253A52A18F9FE00F0665C /* HowToPlayScene.sks */,
+				D8F858B52A1CBBF20061AABD /* TimesUpScene.sks */,
 			);
 			path = SKS;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 			children = (
 				D812538B2A18C74200F0665C /* HomeScene.swift */,
 				D81253A12A18F8F800F0665C /* GameScene.swift */,
+				D8F858B92A1CBDD40061AABD /* TimesUpScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -174,6 +180,7 @@
 				D81253882A18C74200F0665C /* HomeScene.sks in Resources */,
 				D81253902A18C74200F0665C /* Assets.xcassets in Resources */,
 				D812538A2A18C74200F0665C /* Actions.sks in Resources */,
+				D8F858B62A1CBBF20061AABD /* TimesUpScene.sks in Resources */,
 				D81253A42A18F9D100F0665C /* StatScene.sks in Resources */,
 				D81253932A18C74200F0665C /* Main.storyboard in Resources */,
 			);
@@ -188,6 +195,7 @@
 			files = (
 				D81253A82A1900CE00F0665C /* RockNode.swift in Sources */,
 				D81253A22A18F8F800F0665C /* GameScene.swift in Sources */,
+				D8F858BA2A1CBDD40061AABD /* TimesUpScene.swift in Sources */,
 				D8F858B42A1CA4570061AABD /* TimerNode.swift in Sources */,
 				D812538E2A18C74200F0665C /* ViewController.swift in Sources */,
 				D87E5CA72A1B4E7100B7D5D5 /* WordManager.swift in Sources */,
