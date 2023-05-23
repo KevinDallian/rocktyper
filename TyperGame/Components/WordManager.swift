@@ -15,6 +15,7 @@ class WordManager {
     private init() {
         print("loading words")
         loadWords()
+        words.shuffle()
     }
     
     func loadWords() {

@@ -39,7 +39,7 @@ class HomeScene: SKScene {
     }
     
     func goToScene(scene: SKScene){
-        let sceneTransition = SKTransition.fade(with: SKColor.darkGray, duration: 1)
+        let sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 1)
         scene.scaleMode = .resizeFill
         self.view?.presentScene(scene, transition: sceneTransition)
     }
