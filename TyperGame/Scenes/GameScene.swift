@@ -139,7 +139,7 @@ class GameScene : SKScene{
         addChild(rockCounterLabel)
         
         // label for start
-        let startLabel = SKLabelNode(text: "Press any key to start")
+        let startLabel = SKLabelNode(text: "Type the words on the rock!")
         startLabel.fontName = "Skia"
         startLabel.fontSize = 32
         startLabel.fontColor = .black

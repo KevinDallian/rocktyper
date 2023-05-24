@@ -9,8 +9,7 @@ import Foundation
 
 class HistoryManager : Codable {
     private var histories : [History] = []
-    private init(){
-    }
+    private init(){}
     
     static var shared : HistoryManager = {
         if let data = UserDefaults.standard.data(forKey: "HistoryManager"){
@@ -25,10 +24,8 @@ class HistoryManager : Codable {
         return HistoryManager()
     }()
     
-    func appendHistory(history: History){
-        if histories.contains(where: { oldHistory in
-            oldHistory.name == history.name
-        }) {
+    func appendHistory(history: History) {
+        if histories.contains(where: {oldHistory in oldHistory.name == history.name}) {
             let index = histories.firstIndex { oldHistory in
                 oldHistory.name == history.name
             }
