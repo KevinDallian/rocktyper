@@ -11,7 +11,8 @@ class WordManager {
     var words : [String] = ["hello", "world", "this", "is", "fine", "mamam"]
     var rockCrushedCounter = 0
     var rockSkippedCounter = 0
-    var typedWords : [String] = []
+    var characterErrors = 0
+    var historyManager = HistoryManager.shared
     
     static var shared = WordManager()
     
@@ -21,12 +22,15 @@ class WordManager {
     }
     
     func calculateWPM() -> Double {
-        Double(rockCrushedCounter + rockSkippedCounter) / 30 * 60
+        let netTotalCharacters = (rockCrushedCounter * 5) + rockCrushedCounter - characterErrors
+        
+        return Double(netTotalCharacters) / (5 * 30) * 60
     }
     
     func calculateAccuracy() -> Double {
        Double(rockCrushedCounter) / Double(rockCrushedCounter + rockSkippedCounter) * 100
     }
+    
     func loadWords() {
         guard let url = URL(string: "https://random-word-api.herokuapp.com/word?number=200&length=5") else {
             return
@@ -51,8 +55,12 @@ class WordManager {
     }
     
     func resetWordManager(){
-        typedWords.removeAll()
         rockCrushedCounter = 0
         rockSkippedCounter = 0
+    }
+    
+    func createHistory(name : String){
+        let history = History(name: name, wpm: calculateWPM(), accuracy: calculateAccuracy())
+        historyManager.appendHistory(history: history)
     }
 }

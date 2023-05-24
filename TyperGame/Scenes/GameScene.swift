@@ -43,14 +43,15 @@ class GameScene : SKScene{
         for character in characters {
             let characterString = String(character)
             
-            if characterString == " " {
+            if characterString == " " { // space
                 let wordIsTrue = checkWordIsTrue(word: textField!.text!, index: currentRockIndex)
                 nextRock(wordIsTrue: wordIsTrue)
                 if currentRockIndex != 7 && currentRockIndex % 7 == 0 {
                     generateRocks(row: 4)
                 }
                 textField!.text! = ""
-            } else if keyCode == 51 {
+            } else if keyCode == 51 { // backspace
+                wordManager.characterErrors += 1
                 textField!.text! = String(textField!.text!.dropLast())
             }
             else{
@@ -80,7 +81,7 @@ class GameScene : SKScene{
             for column in 0..<7 {
                 let rock = RockNode(text: wordManager.words[totalRocks])
                 rock.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-                rock.position = CGPoint(x: rock.size.height + rock.size.width * CGFloat(column), y: frame.maxY - 50 - CGFloat(row) * rock.size.height - rock.size.height)
+                rock.position = CGPoint(x: frame.minX + rock.size.width + rock.size.width * CGFloat(column), y: frame.maxY - 50 - CGFloat(row) * rock.size.height - rock.size.height)
                 rocks.append(rock)
                 addChild(rock)
                 totalRocks += 1
@@ -155,7 +156,7 @@ class GameScene : SKScene{
         for column in 0..<7 {
             let rock = RockNode(text: wordManager.words[totalRocks])
             rock.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-            rock.position = CGPoint(x: rock.size.height + rock.size.width * CGFloat(column), y: frame.maxY - 50 - CGFloat(row) * rock.size.height)
+            rock.position = CGPoint(x: rock.size.height + rock.size.width * CGFloat(column) + 20, y: frame.maxY - 50 - CGFloat(row) * rock.size.height)
             rock.setScale(0)
             rocks.append(rock)
             addChild(rock)
@@ -170,7 +171,6 @@ class GameScene : SKScene{
         self.run(delay){
             self.currentTopRow += 1
         }
-        
     }
     
     func moveRocksToTop() {
@@ -202,7 +202,7 @@ class GameScene : SKScene{
     
     func goToScene(scene : SKScene){
         let sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 1)
-        scene.scaleMode = .resizeFill
+        scene.scaleMode = .aspectFill
         self.view?.presentScene(scene, transition: sceneTransition)
     }
 }

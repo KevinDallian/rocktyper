@@ -19,7 +19,7 @@ class RockNode : SKSpriteNode{
         
         rockNode.size = CGSize(width: 120, height: 100)
         
-        textNode = SKLabelNode(fontNamed: "SF Compact")
+        textNode = SKLabelNode(fontNamed: "Skia")
         textNode.text = text
         textNode.fontSize = 24
         textNode.fontColor = .black

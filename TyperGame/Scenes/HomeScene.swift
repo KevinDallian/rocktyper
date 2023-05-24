@@ -10,13 +10,11 @@ import GameplayKit
 class HomeScene: SKScene {
     private var playBtn : SKSpriteNode!
     private var statBtn : SKSpriteNode!
-    private var howBtn : SKSpriteNode!
     var wordManager = WordManager.shared
     
     override func didMove(to view: SKView) {
         self.playBtn = self.childNode(withName: "//playBtn") as? SKSpriteNode
         self.statBtn = self.childNode(withName: "//statBtn") as? SKSpriteNode
-        self.howBtn = self.childNode(withName: "//howBtn") as? SKSpriteNode
     }
     
     override func mouseUp(with event: NSEvent){
@@ -27,9 +25,6 @@ class HomeScene: SKScene {
         }
         else if atPoint(location) == statBtn {
             goToScene(scene: SKScene(fileNamed: "StatScene")!)
-        }
-        else if atPoint(location) == howBtn{
-            goToScene(scene: SKScene(fileNamed: "HowToPlayScene")!)
         }
     }
     
