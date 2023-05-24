@@ -18,6 +18,9 @@ class GameScene : SKScene{
     var timerIsOn = false
     let timerNode = TimerNode()
     var rockCounterLabel = SKLabelNode()
+    let correctSound : SKAction = SKAction.playSoundFileNamed("correct", waitForCompletion: false)
+    let incorrectSound : SKAction = SKAction.playSoundFileNamed("incorrect", waitForCompletion: false)
+    let wooshSound : SKAction = SKAction.playSoundFileNamed("wooshReduced", waitForCompletion: false)
     
     override func didMove(to view: SKView){
         super.didMove(to: view)
@@ -118,11 +121,11 @@ class GameScene : SKScene{
         rockCounterImage.position = CGPoint(x: frame.maxX - 200, y: frame.maxY - 50)
         rockCounterImage.size = CGSize(width: 35, height: 35)
         addChild(rockCounterImage)
-        rockCounterLabel.text = ":    \(wordManager.rockCrushedCounter)"
+        rockCounterLabel.text = "    \(wordManager.rockCrushedCounter)"
         rockCounterLabel.fontName = "Skia"
         rockCounterLabel.fontSize = 32
         rockCounterLabel.fontColor = .black
-        rockCounterLabel.position  = CGPoint(x: frame.maxX - 170, y: frame.maxY - 60)
+        rockCounterLabel.position  = CGPoint(x: frame.maxX - 140, y: frame.maxY - 60)
         rockCounterLabel.horizontalAlignmentMode = .left
         addChild(rockCounterLabel)
         
@@ -141,15 +144,18 @@ class GameScene : SKScene{
     
     func nextRock(wordIsTrue : Bool) {
         if wordIsTrue {
-            rocks[currentRockIndex].textNode.fontColor = NSColor(calibratedRed: 63/255, green: 232/255, blue: 20/255, alpha: 1.0)
+            rocks[currentRockIndex].textNode.fontColor = NSColor(calibratedRed: 0/255, green: 82/255, blue: 0/255, alpha: 1.0)
             wordManager.rockCrushedCounter += 1
+            run(correctSound)
+            
         }else{
-            rocks[currentRockIndex].textNode.fontColor = .red
+            rocks[currentRockIndex].textNode.fontColor = NSColor(calibratedRed: 146/255, green: 2/255, blue: 5/255, alpha: 1.0)
             wordManager.rockSkippedCounter += 1
+            run(incorrectSound)
         }
         
         currentRockIndex += 1
-        rockCounterLabel.text = ":    \(wordManager.rockCrushedCounter)"
+        rockCounterLabel.text = "    \(wordManager.rockCrushedCounter)"
     }
     
     func generateRocks(row: Int){
@@ -184,6 +190,7 @@ class GameScene : SKScene{
                 row += 1
             }
         }
+        run(wooshSound)
     }
     
     func removeTopRocks(){
@@ -201,7 +208,7 @@ class GameScene : SKScene{
     }
     
     func goToScene(scene : SKScene){
-        let sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 1)
+        let sceneTransition = SKTransition.flipHorizontal(withDuration: 0.5)
         scene.scaleMode = .aspectFill
         self.view?.presentScene(scene, transition: sceneTransition)
     }

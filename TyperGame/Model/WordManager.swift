@@ -60,7 +60,7 @@ class WordManager {
     }
     
     func createHistory(name : String){
-        let history = History(name: name, wpm: calculateWPM(), accuracy: calculateAccuracy())
+        let history = History(name: name, totalRocks : rockCrushedCounter, wpm: calculateWPM(), accuracy: calculateAccuracy())
         historyManager.appendHistory(history: history)
     }
 }

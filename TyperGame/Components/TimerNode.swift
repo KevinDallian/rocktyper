@@ -20,7 +20,7 @@ class TimerNode: SKLabelNode {
     }
     
     func timerIdle(){
-        text = String(format: "%02d", 30)
+        text = String(format: "%02d:%02d", 0, 30)
     }
     
     func stopTimer() {
@@ -35,7 +35,8 @@ class TimerNode: SKLabelNode {
         currentTime = Date.timeIntervalSinceReferenceDate - startTime
         let remainingTime = max(30 - currentTime, 0)
         let seconds = Int(remainingTime) % 30
-        text = String(format: "%02d", seconds)
+        let minutes = Int(remainingTime/60)
+        text = String(format: "%02d:%02d", minutes, seconds)
         
         if remainingTime <= 0 {
             stopTimer()

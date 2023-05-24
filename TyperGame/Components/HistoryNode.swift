@@ -17,17 +17,17 @@ class HistoryNode : SKSpriteNode {
         self.nameNode = SKLabelNode(text: name)
         self.nameNode.fontSize = 24
         self.nameNode.fontName = "Skia"
-        self.nameNode.fontColor = .white
+        self.nameNode.fontColor = .black
         
         self.wpmNode = SKLabelNode(text: String(format: "%.0f", wpm))
         self.wpmNode.fontSize = 24
         self.wpmNode.fontName = "Skia"
-        self.wpmNode.fontColor = .white
+        self.wpmNode.fontColor = .black
         
         self.accuracyNode = SKLabelNode(text: String(format: "%.0f %%", accuracy))
         self.accuracyNode.fontSize = 24
         self.accuracyNode.fontName = "Skia"
-        self.accuracyNode.fontColor = .white
+        self.accuracyNode.fontColor = .black
         
         super.init(texture: nil, color: .clear, size: CGSize())
         addChild(nameNode)

@@ -9,6 +9,7 @@ import Foundation
 
 struct History {
     let name : String
+    let totalRocks : Int
     let wpm : Double
     let accuracy : Double
 }

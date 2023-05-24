@@ -14,21 +14,28 @@ class TimesUpScene : SKScene {
     private var wpm : SKLabelNode!
     private var accuracy : SKLabelNode!
     private var textField : SKLabelNode?
+    let congratsSound = SKAction.playSoundFileNamed("congratulations", waitForCompletion: false)
     
     override func didMove(to view: SKView){
+        run(congratsSound)
         self.rockCounter = self.childNode(withName: "//rockCounter") as? SKLabelNode
         self.rockCounter.text = "You have crushed \(wordManager.rockCrushedCounter) rocks"
         
         self.wpm = self.childNode(withName: "//wpm") as? SKLabelNode
-        self.wpm.text = String(format: "wpm : %.0f", wordManager.calculateWPM())
+        self.wpm.text = String(format: "Rocks per Minute : %.0f", wordManager.calculateWPM())
         
         self.accuracy = self.childNode(withName: "//accuracy") as? SKLabelNode
         self.accuracy.text = String(format: "accuracy : %.0f", wordManager.calculateAccuracy())
         
-        self.textField = SKLabelNode(text: "")
-        self.textField?.position = CGPoint(x: frame.midX, y: frame.midY - 200)
-        addChild(textField!)
+        let roundedRectangle = SKShapeNode(rectOf: CGSize(width: 300, height: 50), cornerRadius: CGFloat(10))
+        roundedRectangle.position = CGPoint(x: frame.midX, y: frame.midY - 200)
+        roundedRectangle.fillColor = .darkGray
+        roundedRectangle.strokeColor = .darkGray
+        addChild(roundedRectangle)
         
+        self.textField = SKLabelNode(text: "")
+        self.textField?.position = CGPoint(x: frame.midX, y: frame.midY - 210)
+        addChild(textField!)
         
     }
     

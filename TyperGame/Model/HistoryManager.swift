@@ -9,20 +9,7 @@ import Foundation
 
 class HistoryManager {
     private var histories : [History] = []
-    private init(){
-        appendHistory(history: History(name: "Kevin", wpm: 100, accuracy: 100))
-        appendHistory(history: History(name: "Gerald", wpm: 100, accuracy: 80))
-        appendHistory(history: History(name: "RandomName", wpm: 200, accuracy: 80))
-        appendHistory(history: History(name: "Typer", wpm: 150, accuracy: 80))
-        appendHistory(history: History(name: "RandomName1", wpm: 100, accuracy: 100))
-        appendHistory(history: History(name: "RandomTyper", wpm: 100, accuracy: 80))
-        appendHistory(history: History(name: "Catherine", wpm: 200, accuracy: 80))
-        appendHistory(history: History(name: "Random", wpm: 150, accuracy: 80))
-        appendHistory(history: History(name: "Kevin", wpm: 100, accuracy: 100))
-        appendHistory(history: History(name: "Meme", wpm: 100, accuracy: 80))
-        appendHistory(history: History(name: "Mamam", wpm: 200, accuracy: 80))
-        appendHistory(history: History(name: "Dewa", wpm: 150, accuracy: 80))
-    }
+    private init(){}
     
     static var shared = HistoryManager()
     

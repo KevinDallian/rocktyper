@@ -59,8 +59,4 @@ class StatScene : SKScene {
             row += 1
         }
     }
-    
-    func initializeHistory(){
-        let name = SKLabelNode(text: "Name")
-    }
 }
