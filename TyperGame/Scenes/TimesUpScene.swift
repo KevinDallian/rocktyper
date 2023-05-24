@@ -29,6 +29,7 @@ class TimesUpScene : SKScene {
         self.textField?.position = CGPoint(x: frame.midX, y: frame.midY - 200)
         addChild(textField!)
         
+        
     }
     
     override func keyDown(with event: NSEvent) {

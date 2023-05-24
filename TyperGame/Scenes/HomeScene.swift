@@ -12,6 +12,11 @@ class HomeScene: SKScene {
     private var statBtn : SKSpriteNode!
     var wordManager = WordManager.shared
     
+    enum SceneName {
+        case gameScene
+        case statScene
+    }
+    
     override func didMove(to view: SKView) {
         self.playBtn = self.childNode(withName: "//playBtn") as? SKSpriteNode
         self.statBtn = self.childNode(withName: "//statBtn") as? SKSpriteNode
@@ -21,21 +26,25 @@ class HomeScene: SKScene {
         let location = event.location(in: self)
         
         if atPoint(location) == playBtn {
-            goToScene(scene: GameScene())
+            goToScene(scene: GameScene(), sceneName: .gameScene)
         }
         else if atPoint(location) == statBtn {
-            goToScene(scene: SKScene(fileNamed: "StatScene")!)
+            goToScene(scene: SKScene(fileNamed: "StatScene")!, sceneName: .statScene)
         }
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
     
-    func goToScene(scene: SKScene){
+    func goToScene(scene: SKScene, sceneName : SceneName){
         let sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 1)
-        scene.scaleMode = .resizeFill
+        if sceneName == .statScene {
+            scene.scaleMode = .fill
+        }else{
+            scene.scaleMode = .resizeFill
+        }
+        
         self.view?.presentScene(scene, transition: sceneTransition)
     }
 }
