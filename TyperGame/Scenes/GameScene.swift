@@ -17,10 +17,16 @@ class GameScene : SKScene{
     var currentTopRow = 0
     var timerIsOn = false
     let timerNode = TimerNode()
+    var restartBtn : SKSpriteNode!
     var rockCounterLabel = SKLabelNode()
     let correctSound : SKAction = SKAction.playSoundFileNamed("correct", waitForCompletion: false)
     let incorrectSound : SKAction = SKAction.playSoundFileNamed("incorrect", waitForCompletion: false)
     let wooshSound : SKAction = SKAction.playSoundFileNamed("wooshReduced", waitForCompletion: false)
+    
+    enum SceneName {
+        case gameScene
+        case congratulationScene
+    }
     
     override func didMove(to view: SKView){
         super.didMove(to: view)
@@ -30,7 +36,10 @@ class GameScene : SKScene{
     
     override func mouseUp(with event: NSEvent){
         let location = event.location(in: self)
-        let convertedLocation = convert(location, to: self)
+        
+        if atPoint(location) == restartBtn {
+            restartGame()
+        }
     }
     
     override func keyDown(with event: NSEvent) {
@@ -69,7 +78,7 @@ class GameScene : SKScene{
     override func update(_ currentTime : TimeInterval){
         timerNode.updateTimer()
         if timerNode.timeIsUp {
-            goToScene(scene: SKScene(fileNamed: "TimesUpScene")!)
+            goToScene(scene: SKScene(fileNamed: "TimesUpScene")!, sceneName: .congratulationScene)
         }
     }
     
@@ -140,6 +149,11 @@ class GameScene : SKScene{
         let originalScale = SKAction.scale(to: 1.0, duration: 0.5)
         startLabel.run(SKAction.repeatForever(SKAction.sequence([bigScale, originalScale])))
         addChild(startLabel)
+        
+        restartBtn = SKSpriteNode(imageNamed: "restartButton")
+        restartBtn.size = CGSize(width: 20, height: 20)
+        restartBtn.position = CGPoint(x: 200, y: frame.maxY - 50)
+        addChild(restartBtn)
     }
     
     func nextRock(wordIsTrue : Bool) {
@@ -207,9 +221,20 @@ class GameScene : SKScene{
         word == wordManager.words[index]
     }
     
-    func goToScene(scene : SKScene){
-        let sceneTransition = SKTransition.flipHorizontal(withDuration: 0.5)
-        scene.scaleMode = .aspectFill
+    func goToScene(scene : SKScene, sceneName : SceneName){
+        var sceneTransition : SKTransition
+        if sceneName == .gameScene {
+            sceneTransition = SKTransition.fade(with: SKColor.gray, duration: 0.5)
+            scene.scaleMode = .resizeFill
+        }else{
+            sceneTransition = SKTransition.flipHorizontal(withDuration: 0.5)
+            scene.scaleMode = .aspectFill
+        }
         self.view?.presentScene(scene, transition: sceneTransition)
+    }
+    
+    func restartGame(){
+        wordManager.resetWordManager()
+        goToScene(scene: GameScene(), sceneName: .gameScene)
     }
 }

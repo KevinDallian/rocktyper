@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct History {
+struct History : Codable{
     let name : String
     let totalRocks : Int
     let wpm : Double

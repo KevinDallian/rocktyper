@@ -10,19 +10,19 @@ import SpriteKit
 
 class HistoryNode : SKSpriteNode {
     let nameNode : SKLabelNode!
-    let wpmNode : SKLabelNode!
+    let totalRockNode : SKLabelNode!
     let accuracyNode : SKLabelNode!
     
-    init(name: String, wpm: Double, accuracy: Double) {
+    init(name: String, totalRocks: Int, accuracy: Double) {
         self.nameNode = SKLabelNode(text: name)
         self.nameNode.fontSize = 24
         self.nameNode.fontName = "Skia"
         self.nameNode.fontColor = .black
         
-        self.wpmNode = SKLabelNode(text: String(format: "%.0f", wpm))
-        self.wpmNode.fontSize = 24
-        self.wpmNode.fontName = "Skia"
-        self.wpmNode.fontColor = .black
+        self.totalRockNode = SKLabelNode(text: String(format: "%.0d", totalRocks))
+        self.totalRockNode.fontSize = 24
+        self.totalRockNode.fontName = "Skia"
+        self.totalRockNode.fontColor = .black
         
         self.accuracyNode = SKLabelNode(text: String(format: "%.0f %%", accuracy))
         self.accuracyNode.fontSize = 24
@@ -31,7 +31,7 @@ class HistoryNode : SKSpriteNode {
         
         super.init(texture: nil, color: .clear, size: CGSize())
         addChild(nameNode)
-        addChild(wpmNode)
+        addChild(totalRockNode)
         addChild(accuracyNode)
     }
     

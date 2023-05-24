@@ -51,9 +51,9 @@ class StatScene : SKScene {
     func getHistoryNode(){
         var row = 0
         for history in histories {
-            let historyNode = HistoryNode(name: history.name, wpm: history.wpm, accuracy: history.accuracy)
+            let historyNode = HistoryNode(name: history.name, totalRocks: history.totalRocks, accuracy: history.accuracy)
             historyNode.nameNode.position = CGPoint(x: frame.midX - 160, y: frame.maxY - 300 - CGFloat(50 * row))
-            historyNode.wpmNode.position = CGPoint(x: frame.midX, y: frame.maxY - 300 - CGFloat(50 * row))
+            historyNode.totalRockNode.position = CGPoint(x: frame.midX, y: frame.maxY - 300 - CGFloat(50 * row))
             historyNode.accuracyNode.position = CGPoint(x: frame.midX + 160, y: frame.maxY - 300 - CGFloat(50 * row))
             addChild(historyNode)
             row += 1
