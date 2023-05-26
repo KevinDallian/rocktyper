@@ -19,9 +19,9 @@ class GameScene : SKScene{
     let timerNode = TimerNode()
     var restartBtn : SKSpriteNode!
     var rockCounterLabel = SKLabelNode()
-    let correctSound : SKAction = SKAction.playSoundFileNamed("correct", waitForCompletion: false)
-    let incorrectSound : SKAction = SKAction.playSoundFileNamed("incorrect", waitForCompletion: false)
-    let wooshSound : SKAction = SKAction.playSoundFileNamed("wooshReduced", waitForCompletion: false)
+    let correctSound = SKAction.playSoundFileNamed("correct", waitForCompletion: false)
+    let incorrectSound  = SKAction.playSoundFileNamed("incorrect", waitForCompletion: false)
+    let wooshSound = SKAction.playSoundFileNamed("wooshReduced", waitForCompletion: false)
     
     enum SceneName {
         case gameScene

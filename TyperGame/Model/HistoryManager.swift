@@ -40,7 +40,7 @@ class HistoryManager : Codable {
     }
     
     func getHistories() -> [History]{
-        let sortedHistories = histories.sorted {$0.wpm > $1.wpm}
+        let sortedHistories = histories.sorted {$0.totalRocks > $1.totalRocks}
         let topHistories = Array(sortedHistories.prefix(8))
         return topHistories
     }
