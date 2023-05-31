@@ -15,7 +15,7 @@ class RockNode : SKSpriteNode{
     init(text: String){
         let rockTexture = SKTexture(imageNamed: rocks.randomElement()!)
         let rockSize = rockTexture.size()
-        let rockNode = SKSpriteNode(texture: rockTexture, color : .clear, size: rockSize)
+        let rockNode = SKSpriteNode(texture: rockTexture)
         
         rockNode.size = CGSize(width: 120, height: 100)
         
